@@ -5,11 +5,13 @@
     %tr
       %th Person
       %th Count
+      %th Updated
   %tbody
     - @counters.each do |c|
       %tr{:class => if( c.title == @highlited_title) then 'hilite' end}
         %td= c.title
         %td= c.count
+        %td= c.updated_at.in_time_zone("Asia/Seoul")
 
 = form_tag "counters/pay", :method => :get, :id => 'buttoms_form' do
   = hidden_field_tag "highlited_title", @highlited_title
