@@ -10,11 +10,18 @@ Whopayforcoffe::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  match 'counters/pay' => 'counters#pay', :as => :pay
-  match 'counters/skip' => 'counters#skip', :as => :skip
+  get 'queues/:queue' => 'counters#index', :as => :queues
+  post 'queues/:queue/pay' => 'counters#pay', :as => :pay
+  post 'queues/:queue/skip' => 'counters#skip', :as => :skip
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  resources :counters
+
+  # resources :counters do
+  #   collection do
+  #     post 'pay'
+  #     post 'skip'
+  #   end
+  # end
 
   # Sample resource route with options:
   #   resources :products do

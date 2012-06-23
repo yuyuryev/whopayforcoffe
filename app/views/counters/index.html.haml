@@ -13,7 +13,8 @@
         %td= c.count
         %td= c.updated_at.in_time_zone("Asia/Seoul")
 
-= form_tag "counters/pay", :method => :get, :id => 'buttoms_form' do
-  = hidden_field_tag "highlited_title", @highlited_title
-  = submit_tag 'Pay', :confirm => 'Are you sure?'
-  = submit_tag 'Skip'
+%table
+  %tr
+    %td= button_to 'Pay', pay_path( params[:queue], :highlited_title => @highlited_title )
+    %td= button_to 'Skip', skip_path( params[:queue], :highlited_title => @highlited_title )
+

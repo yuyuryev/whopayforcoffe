@@ -1,11 +1,11 @@
 class CountersController < ApplicationController
 
   def index
-
-    @counters = Counter.all
+# raise params.inspect
+    @counters = Counter.find_all_by_queue params[:queue]
 
     @skipped = session[:skipped] || {}
-    if @skipped.keys.count == @counters.count
+    if @skipped.keys.count >= @counters.count
       @skipped = {}
       session[:skipped] = @skipped
     end
@@ -23,19 +23,22 @@ class CountersController < ApplicationController
 
   def pay
 #    raise params.inspect
-    if params[:commit]=='Pay'
-      @counter = Counter.find_by_title params[:highlited_title]
+    @counter = Counter.find_by_title_and_queue params[:highlited_title], params[:queue]
+    if( @counter )
       @counter.count+=1
       @counter.save!
-      session[:skipped]={}
     end
-    if params[:commit]=='Skip'
-      if session[:skipped] == nil
-        session[:skipped] = {}
-      end
-      session[:skipped][params[:highlited_title]] = 0
+    session[:skipped]={}
+    redirect_to queues_path params[:queue]
+  end
+
+  def skip
+#    raise params.inspect
+    if session[:skipped] == nil
+      session[:skipped] = {}
     end
-    redirect_to counters_path
+    session[:skipped][params[:highlited_title]] = 0
+    redirect_to queues_path params[:queue]
   end
 
 
