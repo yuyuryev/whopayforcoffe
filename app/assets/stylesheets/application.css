@@ -18,7 +18,7 @@ html, body {
   background: White;
   color: DarkSlateGrey;
   font-family: Tahoma, Verdana, sans-serif;
-  font-size: 10pt;
+  font-size: 18pt;
 }
 div#main {
   margin: 0;
@@ -75,4 +75,10 @@ form label {
   line-height: 25px;
   font-weight: bold;
   color: maroon;
+}
+input {
+  font-size:22px;
+  font-weight:bold;
+  width:200px;
+  height:60px;
 }

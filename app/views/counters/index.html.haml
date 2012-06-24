@@ -12,7 +12,6 @@
         %td= c.title
         %td= c.count
         %td= c.updated_at.in_time_zone("Asia/Seoul")
-
 %table
   %tr
     %td= button_to 'Pay', pay_path( params[:queue], :highlited_title => @highlited_title )
