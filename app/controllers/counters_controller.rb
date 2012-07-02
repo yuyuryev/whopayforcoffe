@@ -11,9 +11,8 @@ class CountersController < ApplicationController
     end
 
     min_count = 10000000000000000
-    count = 1
     @counters.each do |c|
-      unless @skipped.has_key? c.id
+      unless @skipped.has_key? c.title
         if c.count < min_count 
           min_count = c.count
           @highlited_title = c.title
